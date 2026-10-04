@@ -124,6 +124,13 @@ jobs:
           cp dist/share/nextpnr/himbaechel/xilinx/*.bin dist/share/nextpnr/himbaechel/xilinx/chipdb-id.txt chipdb-cache/
           ls -la chipdb-cache
 
+      # Append chipdb-parts.json to the generated package to allow downstream
+      # teams generating parts lists.
+      - name: Append chipdb-parts.json
+        run: |
+          cp chipdb-parts.json dist/share/nextpnr/himbaechel/xilinx
+          cat -n dist/share/nextpnr/himbaechel/xilinx/chipdb-parts.json
+
       # The file list comes from the manifest through the packer's own rule
       # (pack.families.chipdb_dies): one chipdb-<die>.bin per die, and
       # nothing else next to them.
